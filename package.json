@@ -1,0 +1,47 @@
+{
+  "name": "spectacle-theme",
+  "version": "1.0.0",
+  "main": "dist/spectacle-theme.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Dustin Schau <dustin.schau@objectpartners.com>",
+  "constributors": [
+
+  ],
+  "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged",
+    "prebuild": "npm run clean",
+    "build": "webpack",
+    "clean": "del-cli \"dist/**/*\"",
+    "prettier": "prettier --write --single-quote \"src/**/*.js\""
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "polished": "~1.1.0",
+    "react": "~15.5.4",
+    "spectacle": "~2.0.0"
+  },
+  "devDependencies": {
+    "babel-loader": "~7.0.0",
+    "babel-plugin-add-module-exports": "~0.2.1",
+    "babel-plugin-polished": "~1.0.3",
+    "babel-plugin-transform-object-rest-spread": "~6.23.0",
+    "babel-preset-env": "~1.4.0",
+    "babel-preset-react": "~6.24.1",
+    "del-cli": "~0.2.1",
+    "file-loader": "~0.11.1",
+    "husky": "~0.13.3",
+    "lint-staged": "~3.4.1",
+    "prettier": "~1.2.2",
+    "rollup": "~0.41.6",
+    "url-loader": "~0.5.8",
+    "webpack": "~2.5.0"
+  }
+}
