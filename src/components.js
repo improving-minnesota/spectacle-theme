@@ -70,7 +70,6 @@ export class ContentSlide extends Component {
 
 export class TitleSlide extends Component {
   render() {
-    console.log(this.context);
     return (
       <Slide>
         <TiledBackground top={0} />

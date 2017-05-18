@@ -7,24 +7,40 @@ import pattern from './images/pattern.svg';
 
 import { OPI_BLACK, OPI_RED } from './colors';
 
-export default (userColors, ...rest) => {
-  const colors = assign(
-    {
-      primary: OPI_RED,
-      secondary: OPI_BLACK,
-      tertiary: 'white',
-      quartenary: 'white'
-    },
-    userColors
-  );
-  const fonts = assign(
-    {
-      primary: 'Montserrat',
-      secondary: 'Helvetica'
-    },
-    ...rest
-  );
+const defaultColors = {
+  primary: OPI_RED,
+  secondary: OPI_BLACK,
+  tertiary: 'white',
+  quartenary: 'white'
+};
+
+const defaultFonts = {
+  primary: {
+    name: 'Roboto Condensed',
+    googleFont: true,
+    styles: ['700']
+  },
+  secondary: {
+    name: 'Roboto',
+    googleFont: true,
+    styles: ['400', '700']
+  },
+  tertiary: 'monospace'
+};
+
+export default (colorArgs = defaultColors, fontArgs = defaultFonts) => {
+  const colors = Object.assign({}, defaultColors, colorArgs);
+  let normalizedFontArgs = {};
   let googleFonts = {};
+  Object.keys(fontArgs).forEach(key => {
+    const value = fontArgs[key];
+    const fontName = value.hasOwnProperty('name') ? value.name : value;
+    normalizedFontArgs = { ...normalizedFontArgs, [key]: fontName };
+    if (value.hasOwnProperty('googleFont') && value.googleFont) {
+      googleFonts = { ...googleFonts, [key]: value };
+    }
+  });
+  const fonts = Object.assign({}, defaultFonts, normalizedFontArgs);
   return {
     colors,
     fonts,
