@@ -3,6 +3,7 @@ import * as polished from 'polished';
 import assign from './deep-assign';
 
 import logo from './images/OPi-logo.svg';
+import pattern from './images/pattern.svg';
 
 import { OPI_BLACK, OPI_RED } from './colors';
 
@@ -54,6 +55,19 @@ export default (userColors, ...rest) => {
         // display: 'flex',
         // justifyContent: 'center',
         // flexDirection: 'column'
+      },
+      '.spectacle-slide': {
+        backgroundSize: '200px !important',
+        backgroundImage: `url(${pattern})`
+      },
+      '.spectacle-slide:before': {
+        content: "''",
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        backgroundImage: `linear-gradient(270deg,#fff 25%,hsla(0,0%,100%,0)) !important`
       }
     },
     fullscreen: {
