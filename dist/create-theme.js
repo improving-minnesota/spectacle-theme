@@ -133,7 +133,9 @@
                 'b' /* OPI_BLACK */
               ],
               tertiary: 'white',
-              quartenary: 'white'
+              quartenary: __WEBPACK_IMPORTED_MODULE_3__colors__[
+                'a' /* OPI_RED */
+              ]
             },
             userColors
           );
@@ -250,7 +252,7 @@
                   height: '10px',
                   borderTopLeftRadius: '10px',
                   borderTopRightRadius: '10px',
-                  background: colors.secondary
+                  background: colors.quartenary
                 },
                 pacmanBottom: {
                   position: 'absolute',
@@ -259,7 +261,7 @@
                   height: '10px',
                   borderBottomLeftRadius: '10px',
                   borderBottomRightRadius: '10px',
-                  background: colors.secondary,
+                  background: colors.quartenary,
                   top: '10px'
                 },
                 point: {
@@ -270,7 +272,7 @@
                   height: '10px',
                   borderWidth: 2,
                   borderStyle: 'solid',
-                  borderColor: colors.secondary,
+                  borderColor: colors.quartenary,
                   borderRadius: '50%',
                   transition: 'all 0.01s ease-out 0.4s'
                 }

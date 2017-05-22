@@ -13,7 +13,7 @@ export default (userColors, ...rest) => {
       primary: OPI_RED,
       secondary: OPI_BLACK,
       tertiary: 'white',
-      quartenary: 'white'
+      quartenary: OPI_RED
     },
     userColors
   );
@@ -124,7 +124,7 @@ export default (userColors, ...rest) => {
           height: '10px',
           borderTopLeftRadius: '10px',
           borderTopRightRadius: '10px',
-          background: colors.secondary
+          background: colors.quartenary
         },
         pacmanBottom: {
           position: 'absolute',
@@ -133,7 +133,7 @@ export default (userColors, ...rest) => {
           height: '10px',
           borderBottomLeftRadius: '10px',
           borderBottomRightRadius: '10px',
-          background: colors.secondary,
+          background: colors.quartenary,
           top: '10px'
         },
         point: {
@@ -144,7 +144,7 @@ export default (userColors, ...rest) => {
           height: '10px',
           borderWidth: 2,
           borderStyle: 'solid',
-          borderColor: colors.secondary,
+          borderColor: colors.quartenary,
           borderRadius: '50%',
           transition: 'all 0.01s ease-out 0.4s'
         }
