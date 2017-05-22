@@ -60,18 +60,31 @@ export default (colorArgs = defaultColors, fontArgs = defaultFonts) => {
       '*': {
         boxSizing: 'border-box'
       },
-      '.spectacle-content': {
-        // maxHeight: '100% !important',
-        // maxWidth: '100% !important',
-        // position: 'absolute',
-        // top: 0,
-        // right: 0,
-        // bottom: 0,
-        // left: 0,
-        // display: 'flex',
-        // justifyContent: 'center',
-        // flexDirection: 'column'
+      '.opi-title-slide .spectacle-slide > div:before': {
+        content: JSON.stringify(''),
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        height: '65%',
+        transform: `skewY(-8deg)`,
+        transformOrigin: 0,
+        background: `linear-gradient(65deg, black, ${polished.lighten(0.1, OPI_BLACK)} 75%)`
       },
+      '.opi-title-slide .spectacle-slide > div:after': {
+        content: JSON.stringify(''),
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        height: 56,
+        width: '100%',
+        background: `url(${logo}) no-repeat right 10px center / auto 50%`
+      },
+      '.opi-title-slide .spectacle-slide:before': {},
       '.spectacle-slide': {
         backgroundSize: '200px !important',
         backgroundImage: `url(${pattern})`
