@@ -24,4 +24,16 @@ export default class Presentation extends React.Component {
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
 ```
 
+## Development
+Clone the [spectacle-boilerplate] repo and copy it into the `example` directory.
+
+Then follow the build instructions below (from the root level of the project):
+
+1. `yarn build`
+1. `cd dist && npm link`
+1. `cd ../`
+1. `cd example` // boilerplate project from spectacle
+1. `npm link spectacle-theme`
+
 [spectacle]: https://github.com/FormidableLabs/spectacle
+[spectacle-boilerplate]: https://github.com/FormidableLabs/spectacle-boilerplate
