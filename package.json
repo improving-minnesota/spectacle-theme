@@ -18,7 +18,7 @@
     "prettier": "prettier --write --single-quote \"src/**/*.js\""
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "prettier --write --single-quote",
       "git add"
     ]

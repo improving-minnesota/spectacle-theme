@@ -57,26 +57,24 @@ const Logo = ({ includeBackground = true }) => {
   );
 };
 
-export class ContentSlide extends Component {
+export class ContentSlide extends Slide {
   render() {
-    const { props } = this;
-    return (
-      <Slide {...props}>
-        {props.children || null}
-      </Slide>
-    );
+    return super.render();
   }
 }
 
 export class TitleSlide extends Component {
+  componentWillMount() {
+    document.body.classList.add('opi-title-slide');
+  }
+  componentWillUnmount() {
+    document.body.classList.remove('opi-title-slide');
+  }
   render() {
-    console.log(this.context);
     return (
       <Slide>
-        <TiledBackground top={0} />
         <div
           style={{
-            backgroundImage: `linear-gradient(65deg, black, ${OPI_BLACK} 75%)`,
             height: '65%',
             transform: `skewY(-8deg)`,
             transformOrigin: 0,
@@ -88,7 +86,6 @@ export class TitleSlide extends Component {
             width: '100%'
           }}
         />
-        <Logo includeBackground={false} />
         <div
           style={{
             transform: `skewY(-8deg)`,
@@ -96,10 +93,15 @@ export class TitleSlide extends Component {
           }}
         >
           {React.Children.map(this.props.children, child => {
-            if (child.props && child.props.size === 1) {
+            const { size } = child.props;
+            const sizes = {
+              1: OPI_RED,
+              2: '#FFFFFF'
+            };
+            if (size) {
               return React.cloneElement(child, {
                 style: {
-                  color: '#C82506'
+                  color: sizes[size] || OPI_BLACK
                 }
               });
             }

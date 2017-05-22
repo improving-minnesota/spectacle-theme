@@ -60,7 +60,7 @@ typings/
 
 # project files
 .vscode/
-example/
+# example/
 
 # os files
 .DS_Store
