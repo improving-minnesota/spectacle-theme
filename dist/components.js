@@ -14503,6 +14503,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var prevMount = false;
+
 var ContentSlide = function (_Slide) {
   _inherits(ContentSlide, _Slide);
 
@@ -14513,14 +14515,18 @@ var ContentSlide = function (_Slide) {
   }
 
   _createClass(ContentSlide, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      prevMount = true;
       document.body.classList.add(__WEBPACK_IMPORTED_MODULE_2__util_class_names__["b" /* CONTENT_SLIDE_CLASS */]);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      document.body.classList.remove(__WEBPACK_IMPORTED_MODULE_2__util_class_names__["b" /* CONTENT_SLIDE_CLASS */]);
+      if (!prevMount) {
+        document.body.classList.remove(__WEBPACK_IMPORTED_MODULE_2__util_class_names__["b" /* CONTENT_SLIDE_CLASS */]);
+      }
+      prevMount = false;
     }
   }, {
     key: 'render',

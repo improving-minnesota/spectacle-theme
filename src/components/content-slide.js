@@ -3,13 +3,19 @@ import Slide from 'spectacle/lib/components/slide';
 
 import { CONTENT_SLIDE_CLASS } from '../util/class-names';
 
+let prevMount = false;
+
 export class ContentSlide extends Slide {
-  componentDidMount() {
+  componentWillMount() {
+    prevMount = true;
     document.body.classList.add(CONTENT_SLIDE_CLASS);
   }
 
   componentWillUnmount() {
-    document.body.classList.remove(CONTENT_SLIDE_CLASS);
+    if (!prevMount) {
+      document.body.classList.remove(CONTENT_SLIDE_CLASS);
+    }
+    prevMount = false;
   }
 
   render() {
