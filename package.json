@@ -1,7 +1,7 @@
 {
   "name": "spectacle-theme",
   "version": "1.0.0",
-  "main": "dist/spectacle-theme.js",
+  "main": "dist/create-theme.js",
   "files": [
     "dist"
   ],
@@ -18,7 +18,7 @@
     "prettier": "prettier --write --single-quote \"src/**/*.js\""
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "prettier --write --single-quote",
       "git add"
     ]
