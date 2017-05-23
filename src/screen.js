@@ -1,30 +1,58 @@
-import * as polished from 'polished';
-
-import assign from './deep-assign';
+import { lighten } from 'polished';
 
 import logo from './images/OPi-logo.svg';
 import pattern from './images/pattern.svg';
 
-import { OPI_BLACK, OPI_RED } from './colors';
+import { OPI_BLACK, OPI_BLACK_LIGHT, OPI_RED } from './util/colors';
+import { CONTENT_SLIDE_CLASS, TITLE_SLIDE_CLASS } from './util/class-names';
 
-export default (userColors, ...rest) => {
-  const colors = assign(
-    {
-      primary: OPI_RED,
-      secondary: OPI_BLACK,
-      tertiary: 'white',
-      quartenary: OPI_RED
-    },
-    userColors
-  );
-  const fonts = assign(
-    {
-      primary: 'Montserrat',
-      secondary: 'Helvetica'
-    },
-    ...rest
-  );
+const defaultColors = {
+  primary: OPI_RED,
+  secondary: OPI_BLACK,
+  tertiary: 'white',
+  quartenary: OPI_RED
+};
+
+const defaultFonts = {
+  primary: {
+    googleFont: true,
+    name: 'Roboto',
+    styles: ['400', '700']
+  },
+  secondary: {
+    googleFont: true,
+    name: 'Montserrat'
+  },
+  tertiary: 'monospace'
+};
+
+const titleSlide = str => {
+  return `.${TITLE_SLIDE_CLASS} .spectacle-slide > div${str}`;
+};
+
+const absolute = () => ({
+  content: JSON.stringify(''),
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0
+});
+
+export default (colorArgs = defaultColors, fontArgs = defaultFonts) => {
+  const colors = Object.assign({}, defaultColors, colorArgs);
+  let normalizedFontArgs = {};
   let googleFonts = {};
+  Object.keys(fontArgs).forEach(key => {
+    const value = fontArgs[key];
+    const fontName = value.hasOwnProperty('name') ? value.name : value;
+    normalizedFontArgs = { ...normalizedFontArgs, [key]: fontName };
+    if (value.hasOwnProperty('googleFont') && value.googleFont) {
+      googleFonts = { ...googleFonts, [key]: value };
+    }
+  });
+  const fonts = Object.assign({}, defaultFonts, normalizedFontArgs);
+
   return {
     colors,
     fonts,
@@ -44,30 +72,26 @@ export default (userColors, ...rest) => {
       '*': {
         boxSizing: 'border-box'
       },
-      '.spectacle-content': {
-        // maxHeight: '100% !important',
-        // maxWidth: '100% !important',
-        // position: 'absolute',
-        // top: 0,
-        // right: 0,
-        // bottom: 0,
-        // left: 0,
-        // display: 'flex',
-        // justifyContent: 'center',
-        // flexDirection: 'column'
+      [titleSlide(':before')]: {
+        ...absolute(),
+        height: '65vh',
+        transform: `skewY(-8deg)`,
+        transformOrigin: 0,
+        background: `linear-gradient(65deg, ${colors.secondary}, ${lighten(0.2, colors.secondary)} 75%)`
       },
-      '.spectacle-slide': {
+      [titleSlide(':after')]: {
+        ...absolute(),
+        height: 56,
+        width: '100%',
+        background: `url(${logo}) no-repeat right 10px center / auto 50%`
+      },
+      [`.${CONTENT_SLIDE_CLASS} .spectacle-slide, .${TITLE_SLIDE_CLASS} .spectacle-slide`]: {
         backgroundSize: '200px !important',
         backgroundImage: `url(${pattern})`
       },
-      '.spectacle-slide:before': {
-        content: "''",
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        backgroundImage: `linear-gradient(270deg,#fff 25%,hsla(0,0%,100%,0)) !important`
+      [`.${CONTENT_SLIDE_CLASS} .spectacle-slide:before, .${TITLE_SLIDE_CLASS} .spectacle-slide:before`]: {
+        ...absolute(),
+        backgroundImage: `linear-gradient(270deg, #fff 25%, hsla(0,0%,100%,0)) !important`
       }
     },
     fullscreen: {
@@ -186,13 +210,13 @@ export default (userColors, ...rest) => {
         borderLeft: `5px solid ${colors.primary}`,
         paddingLeft: 40,
         display: 'block',
-        color: colors.tertiary,
+        color: colors.secondary,
         fontSize: '4.9rem',
         lineHeight: 1,
         fontWeight: 'bold'
       },
       cite: {
-        color: colors.tertiary,
+        color: colors.primary,
         display: 'block',
         clear: 'left',
         fontSize: '2rem',

@@ -13,8 +13,8 @@ _NOTE: this is not currently working as intended; PRs welcome!_
 Spectacle takes a Javascript theme object (applied with Radium), so you won't need any specialized loaders apart from what is already configured
 
 ```javascript
-import { createTheme } from 'spectacle-theme/dist/create-theme';
-import { ContentSlide as Slide, TitleSlide } from 'spectacle-theme/dist/components';
+import { createTheme } from 'spectacle-theme';
+import { ContentSlide as OpiSlide, TitleSlide } from 'spectacle-theme/dist/components';
 
 const theme = createTheme();
 
